@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\title{Fair Resource Allocation}
+\author{}
+\date{October 2019}
+
+\newcommand{\sheng}[1]{{\color{red}{#1}}}%
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+
+\maketitle
+
+We are developing an algorithm whose objective is to model the distribution of a resource across a community in order to maximize equitable access to the resource. Cities are often segregated (for example, by race and income) and therefore distributing public resources and infrastructure in a way that enables equal access for people within various subgroups becomes an important consideration; however, to date, most resource allocation algorithms have optimized for maximum usage and not most equitable usage of a resource. The proposed approach builds on a modified k-means clustering algorithm and takes into consideration the distribution of the underlying demographics in a community for planning where to place a resource.
+
+\section{Definitions \& Preliminaries}
+\label{sec:defi}
+
+\begin{center}
+ \begin{tabular}{||c c||} 
+ \hline
+ Symbols & Description \\ [0.5ex] 
+ \hline\hline
+ $i \in I$, $(x_i, y_i)$ & spatially distributed individuals, locations $(x,y)$ \\ 
+ $c \in C$, $\{x_c, y_c\}$ & spatially distributed centroids, locations $(x,y)$\\
+ $M$, $|X_m|$ & discrete attributes and values\\
+ $s \in S$ & subgroups based on binary attributes \\
+ $L$, $l_{i,c}$, $l_s$ & loss, individual loss, subgroup loss\\
+ $d(i,c)$ & Euclidean distance between individual, centroid \\
+ $\mbox{div}(l_s,l_{s'})$ & divergence in loss between subgroups\\
+ \hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{Individual} The set of individuals, $I$, represent the relevant sample of a community: the subset of the population that is likely to use a resource (for example: potential cyclists, those exposed to covid-19).  Each individual $i \in I$ has a location: $i = \{x_i,y_i\}$ where $x_i$ is the x-coordinate and $y_i$ is the y-coordinate of their residential location. 
+    
+    \item \textbf{Centroid} The set of $k$ centroids, $k = |C|$, denote the point locations of bicycle hubs. The location of a centroid $c \in C$ is defined as $\{x_c,y_c\}$ where $x_c$ represents the x-coordinate, and $y_c$ represents the y-coordinate, of the location.
+    
+    \item \textbf{Attribute} Each individual $i \in I$ is associated with $M$ discrete attributes where each has $|X_m|$ values. 
+    
+    \item \textbf{Subgroup} A subgroup $s$ is defined by the $M$-dimension Cartesian set product of attribute values \cite{zhang2016identifying}:
+        \begin{equation}
+            |S| = \prod_{m=1}^{M}|X_m|
+        \end{equation}
+    \item \textbf{Loss} $l \in [0,1]$ denotes the generic cost of distance to a centroid.
+    
+    \item \textbf{Individual Loss} The individuals' loss is a function of the distance between their location and the closest centroid:  $l_{i,c} = f(distance)$ where $l_{i,c} \in [0,1]$. To begin, this function may resemble a sigmoid function, for example:
+        \begin{equation}
+        l_{i,c} = \frac{1}{1+e^{d(i,c)}}
+        \end{equation}
+    where  $d(i,c)$ is the Euclidean distance between the position of the individual ($i$) and the centroid ($c$):
+        \begin{equation}
+            d(i,c) = \sqrt{(x_i-x_c)^2+(y_i-y_c)^2}
+        \end{equation}
+    Eventually, we may be able to infer this relationship from data and/or use graph distance in place of Euclidean distance.
+    
+    \item \textbf{Subgroup Loss} $l_s$ is the loss experienced by members of a subgroup $s$ with probability $p \in [0,1]$ of the cumulative distribution function. 
+    
+    \item \textbf{Subgroup Divergence} The divergence between subgroups is defined as the maximum difference in loss between two subgroups' cumulative distribution function at a given probability of experiencing some level of loss, $p$ \cite{markatou2017statistical}:
+
+	\begin{equation}
+	    \mbox{div}(l_s,l_{s'}) = \mbox{max}|l_{s,p} - l_{s',p}|
+	\end{equation}
+	
+	%where $l_s$ denotes loss experienced by a subgroup $s$ at some $p$ and $l_{s'}$ denotes loss for subgroup $s'$ at the same $p$.
+	
+	where $l_{s,p}$ is the loss experienced by the subgroup with the maximum loss at $p$, $l_{s,p} = \mbox{arg max}_{s} l_p$, and $l_{s',p}$ is the loss experienced by the subgroup with the minimum loss at $p$, $l_{s',p} = \mbox{arg min}_{s} l_p$.
+	
+	
+    \item \textbf{Equitable Resource Allocation} Given:
+        \begin{enumerate}
+            \item A set of spatially distributed individuals, $I$
+            \item Some number of centroids, $k$
+            \item Some set of discretized attributes, $S$
+            \item Some upper-bound for the divergence in loss across subgroups, $X$
+            \item Some notion of a loss function (e.g. the logistic map)
+        \end{enumerate}
+    
+    Identify the set of centroid locations, $C$, that minimize individual loss while also minimizing the divergence among subgroups.
+    
+            \begin{equation}
+            \label{equ:obj}
+            \mbox{argmin}\left (\sum_{c \in C} \sum_{i \in I} \frac{l_{i,c}}{|I|} + \frac{\mbox{div}(l_s,l_{s'})}{|S|} \right )
+            \end{equation}
+            
+    \sheng{Or, the problem can be defined in another way, like most existing work on constraint-based fair clustering \cite{Chierichetti2018,Chen2019a}, where the fairness is put as a constraint that needs to meet, rather than a part of the objective function.
+            \begin{equation}
+            \mbox{argmin}\sum_{c \in C} \sum_{i \in I} \frac{l_{i,c}}{|I|}, w.r.t. \frac{\mbox{div}(l_s,l_{s'})}{|S|}<L
+            \end{equation}
+            where $L$ is a given loss threshold.
+    }
+    
+\end{itemize}
+
+\noindent \textit{First draft of a procedure:}
+\begin{enumerate}
+    \item Initiate \textit{k} random centroids
+    \item Assign each point to closest centroid using Euclidean distance 
+    \item Refine location of centroid: "So that just leaves the centroid movement step.  For that there are several possibilities, which all basically boil down to trying to move centroids in directions that improve the overall loss function (not just the first term). Perhaps the simplest way (probably not the best) is to propose moving a single center a small distance in a random direction (and reassigning every point to its closest center), but only make that move if it improves the score.  Better would be figuring out how to move centers in a direction which is likely to improve the objective, e.g., prefer moves toward the cluster's center of mass and in directions that reduce disparities.  Even better would be computing the negative gradient of the loss function and moving along that direction."
+    
+    \item Repeat Assignment - Refinement steps until centroid converges.
+\end{enumerate}
+
+
+\section{Notes}
+
+\begin{equation}
+\label{equ:obj}
+\sum_{i \in I} \min_{c \in C} \frac{\mbox{loss}(i,c)}{I_c} + \sum_{a \in A} \mbox{Div}(F_{I_a},F_{I_a'})
+\end{equation}
+
+
+\begin{equation}
+\mbox{Div}(F_{I_a},F_{I_a'}) = max|loss(p)_{F_{I_\alpha}} - loss(p)_{F_{I_\beta}}|
+\end{equation}
+
+
+\begin{itemize}
+    \item $F_{I_\alpha}$ and $F_{I_\beta}$ are the CDFs of $\mbox{minloss}$ for individuals $i \in I_\alpha$ and $i \in I_\beta$ respectively. 
+    \item $p$ is the proportion of people with loss $\leq$ $\mbox{some level of loss}$; so $p \in [0,1]$.
+\end{itemize}
+
+
+\noindent DBN comments: let's use $C$ for the set of cluster centers and $I$ for the set of individuals.  Then for term (1), we have $\sum_{i \in I} \mbox{minloss}(i) = \sum_{i \in I} \min_{c \in C} \mbox{loss}(i,c)$.  I'm not sure what the point of term (2) is, since subgroups will be defined deterministically in terms of observable characteristics.  We should discuss.  For term (3), imagine that we have a set of binary attributes $A$, where each $a\in A$ partitions $I$ into two groups $I_a$ and $I_a^\prime$. Then we could write (3) as $\sum_{a \in A} \mbox{Div}(F_{I_a},F_{I_a'})$, where $\mbox{Div}$ is a measure of divergence between two cumulative distribution functions (CDFs), and $F_{I_a}$ and $F_{I_a'}$ are the CDFs of \mbox{minloss} for individuals $i \in I_a$ and $i \in I_a'$ respectively.\\
+
+\bibliographystyle{SIGCHI-Reference-Format}
+\bibliography{references}
+
+\end{document}

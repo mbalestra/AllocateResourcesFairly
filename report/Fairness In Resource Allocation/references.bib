@@ -1,0 +1,96 @@
+@article{zhang2016identifying,
+  title={Identifying significant predictive bias in classifiers},
+  author={Zhang, Zhe and Neill, Daniel B},
+  journal={arXiv preprint arXiv:1611.08292},
+  year={2016}
+}
+
+@inproceedings{Stoyanovich2018,
+abstract = {Selection algorithms usually score individual items in isolation, and then select the top scoring items. However, often there is an additional diversity objective. Since diversity is a group property, it does not easily jibe with individual item scoring. In this paper, we study set selection queries subject to diversity and group fairness constraints. We develop algorithms for several problem settings with streaming data, where an online decision must be made on each item as it is presented. We show through exper-iments with real and synthetic data that fairness and diversity can be achieved, usually with modest costs in terms of quality. Our experimental evaluation leads to several important in-sights in online set selection. We demonstrate that theoretical guarantees on solution quality are conservative in real datasets, and that tuning the length of the score estimation phase leads to an interesting accuracy-efficiency trade-off. Further, we show that if a difference in scores is expected between groups, then these groups must be treated separately during processing. Other-wise, a solution may be derived that meets diversity constraints, but that selects lower-scoring members of disadvantaged groups.},
+author = {Stoyanovich, Julia and Arbor, Ann},
+booktitle = {EDBT},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Stoyanovich, Arbor - 2018 - Online Set Selection with Fairness and Diversity Constraints.pdf:pdf},
+pages = {241--252},
+title = {{Online Set Selection with Fairness and Diversity Constraints}},
+year = {2018}
+}
+@inproceedings{Backurs2019,
+abstract = {We study the fair variant of the classic {\$}k{\$}-median problem introduced by Chierichetti et al. [2017]. In the standard {\$}k{\$}-median problem, given an input pointset {\$}P{\$}, the goal is to find {\$}k{\$} centers {\$}C{\$} and assign each input point to one of the centers in {\$}C{\$} such that the average distance of points to their cluster center is minimized. In the fair variant of {\$}k{\$}-median, the points are colored, and the goal is to minimize the same average distance objective while ensuring that all clusters have an "approximately equal" number of points of each color. Chierichetti et al. proposed a two-phase algorithm for fair {\$}k{\$}-clustering. In the first step, the pointset is partitioned into subsets called fairlets that satisfy the fairness requirement and approximately preserve the {\$}k{\$}-median objective. In the second step, fairlets are merged into {\$}k{\$} clusters by one of the existing {\$}k{\$}-median algorithms. The running time of this algorithm is dominated by the first step, which takes super-quadratic time. In this paper, we present a practical approximate fairlet decomposition algorithm that runs in nearly linear time. Our algorithm additionally allows for finer control over the balance of resulting clusters than the original work. We complement our theoretical bounds with empirical evaluation.},
+archivePrefix = {arXiv},
+arxivId = {1902.03519},
+author = {Backurs, Arturs and Indyk, Piotr and Onak, Krzysztof and Schieber, Baruch and Vakilian, Ali and Wagner, Tal},
+booktitle = {ICML},
+eprint = {1902.03519},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Backurs et al. - 2019 - Scalable Fair Clustering.pdf:pdf},
+title = {{Scalable Fair Clustering}},
+url = {http://arxiv.org/abs/1902.03519},
+year = {2019}
+}
+@article{Kleindessner2019,
+abstract = {In data summarization we want to choose {\$}k{\$} prototypes in order to summarize a data set. We study a setting where the data set comprises several demographic groups and we are restricted to choose {\$}k{\_}i{\$} prototypes belonging to group {\$}i{\$}. A common approach to the problem without the fairness constraint is to optimize a centroid-based clustering objective such as {\$}k{\$}-center. A natural extension then is to incorporate the fairness constraint into the clustering problem. Existing algorithms for doing so run in time super-quadratic in the size of the data set, which is in contrast to the standard {\$}k{\$}-center problem being approximable in linear time. In this paper, we resolve this gap by providing a simple approximation algorithm for the {\$}k{\$}-center problem under the fairness constraint with running time linear in the size of the data set and {\$}k{\$}. If the number of demographic groups is small, the approximation guarantee of our algorithm only incurs a constant-factor overhead.},
+archivePrefix = {arXiv},
+arxivId = {1901.08628},
+author = {Kleindessner, Matth{\"{a}}us and Awasthi, Pranjal and Morgenstern, Jamie},
+eprint = {1901.08628},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Kleindessner, Awasthi, Morgenstern - 2019 - Fair k-Center Clustering for Data Summarization.pdf:pdf},
+title = {{Fair k-Center Clustering for Data Summarization}},
+url = {http://arxiv.org/abs/1901.08628},
+year = {2019}
+}
+@inproceedings{Dwork2012,
+abstract = {We study fairness in classification, where individuals are classified, e.g., admitted to a university, and the goal is to prevent discrimination against individuals based on their membership in some group, while maintaining utility for the classifier (the university). The main conceptual contribution of this paper is a framework for fair classification comprising (1) a (hypothetical) task-specific metric for determining the degree to which individuals are similar with respect to the classification task at hand; (2) an algorithm for maximizing utility subject to the fairness constraint, that similar individuals are treated similarly. We also present an adaptation of our approach to achieve the complementary goal of "fair affirmative action," which guarantees statistical parity (i.e., the demographics of the set of individuals receiving any classification are the same as the demographics of the underlying population), while treating similar individuals as similarly as possible. Finally, we discuss the relationship of fairness to privacy: when fairness implies privacy, and how tools developed in the context of differential privacy may be applied to fairness.},
+author = {Dwork, Cynthia and Hardt, Moritz and Pitassi, Toniann and Reingold, Omer and Zemel, Richard},
+booktitle = {ITCS},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Dwork et al. - 2012 - Fairness through awareness.pdf:pdf},
+pages = {214--226},
+title = {{Fairness through awareness}},
+year = {2012}
+}
+@article{Bampis2018,
+abstract = {We consider the over-time version of the Max-Min Fair Allocation problem. Given a time horizon t = 1,2,..., T, with at each time f a set of demands and a set of available resources that may change over the time defining instance It, we seek a sequence of solutions Si,S2, ...,ST that (1) are near-optimal at each time f, and (2) as stable as possible (inducing small modification costs). We focus on the impact of the knowledge of the future on the quality and the stability of the returned solutions by distinguishing three settings: the off-line setting where the whole set of instances through the time horizon is known in advance, the on-line setting where no future instance is known, and the k-lookahead setting where at time f, the instances at times t + 1,..., t+ k are known. We first consider the case without restrictions where the set of resources and the set of agents are the same for all instances and where every resource can be allocated to any agent. For the off-line setting, we show that the over-time version of the problem is much harder than the static one, since it becomes NP-hard even for families of instances for which the static problem is trivial. Then, we provide a $\rho$ / $\rho$ +1 approximation algorithm for the off-line setting using as subroutine a $\rho$ -approximation algorithm for the static version. We also give a $\rho$ / $\rho$ +1 -competitive algorithm for the online setting using also as subroutine a p-approximation algorithm for the static version. Furthermore, for the case with restrictions, we show that in the off-line setting it is possible to get a polynomial-time algorithm with the same approximation ratio as in the case without restrictions. For the online setting, we prove that it is not possible to find an online algorithm with bounded competitive ratio. For the 1-lookahead setting however, we give a $\rho$ /2(2 $\rho$ +1) approximation algorithm using as subroutine a $\rho$-approximation algorithm for the static version. {\textcopyright} 2018 International Foundation for Autonomous Agents and Multiagent Systems (www.ifaamas.org). All rights reserved.},
+author = {Bampis, Evripidis and Escoffier, Bruno and Mladenovic, Sasa},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Bampis, Escoffier, Mladenovic - 2018 - Fair resource allocation over time.pdf:pdf},
+journal = {Proceedings of the International Joint Conference on Autonomous Agents and Multiagent Systems, AAMAS},
+keywords = {Approximation algorithms,Fairness,On-line algorithms,Resource allocation,Santa claus,Scheduling},
+number = {Aamas},
+pages = {766--773},
+title = {{Fair resource allocation over time}},
+volume = {2},
+year = {2018}
+}
+@inproceedings{Chen2019a,
+abstract = {We extend the fair machine learning literature by considering the problem of proportional centroid clustering in a metric context. For clustering {\$}n{\$} points with {\$}k{\$} centers, we define fairness as proportionality to mean that any {\$}n/k{\$} points are entitled to form their own cluster if there is another center that is closer in distance for all {\$}n/k{\$} points. We seek clustering solutions to which there are no such justified complaints from any subsets of agents, without assuming any a priori notion of protected subsets. We present and analyze algorithms to efficiently compute, optimize, and audit proportional solutions. We conclude with an empirical examination of the tradeoff between proportional solutions and the {\$}k{\$}-means objective.},
+author = {Chen, Xingyu and Fain, Brandon and Lyu, Charles and Munagala, Kamesh},
+booktitle = {ICML},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Chen et al. - 2019 - Proportionally Fair Clustering.pdf:pdf},
+pages = {1032--1041},
+title = {{Proportionally Fair Clustering}},
+year = {2019}
+}
+@inproceedings{Chierichetti2018,
+abstract = {We study the question of fair clustering under the {\{}$\backslash$em disparate impact{\}} doctrine, where each protected class must have approximately equal representation in every cluster. We formulate the fair clustering problem under both the {\$}k{\$}-center and the {\$}k{\$}-median objectives, and show that even with two protected classes the problem is challenging, as the optimum solution can violate common conventions---for instance a point may no longer be assigned to its nearest cluster center! En route we introduce the concept of fairlets, which are minimal sets that satisfy fair representation while approximately preserving the clustering objective. We show that any fair clustering problem can be decomposed into first finding good fairlets, and then using existing machinery for traditional clustering algorithms. While finding good fairlets can be NP-hard, we proceed to obtain efficient approximation algorithms based on minimum cost flow. We empirically quantify the value of fair clustering on real-world datasets with sensitive attributes.},
+author = {Chierichetti, Flavio and Kumar, Ravi and Lattanzi, Silvio and Vassilvitskii, Sergei},
+booktitle = {NIPS},
+file = {:Users/sw160/Desktop/papers{\_}downloaded/1802.05733.pdf:pdf;:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Chierichetti et al. - 2018 - Fair Clustering Through Fairlets.pdf:pdf},
+pages = {5029--5037},
+title = {{Fair Clustering Through Fairlets}},
+year = {2017}
+}
+@inproceedings{Ahmadian2019,
+abstract = {In this paper we consider clustering problems in which each point is endowed with a color. The goal is to cluster the points to minimize the classical clustering cost but with the additional constraint that no color is over-represented in any cluster. This problem is motivated by practical clustering settings, e.g., in clustering news articles where the color of an article is its source, it is preferable that no single news source dominates any cluster. For the most general version of this problem, we obtain an algorithm that has provable guarantees of performance; our algorithm is based on finding a fractional solution using a linear program and rounding the solution subsequently. For the special case of the problem where no color has an absolute majority in any cluster, we obtain a simpler combinatorial algorithm also with provable guarantees. Experiments on real-world data shows that our algorithms are effective in finding good clustering without over-representation. CCS CONCEPTS • Information systems → Clustering; Data mining; • Theory of computation → Facility location and clustering; Unsuper-vised learning and clustering.},
+author = {Ahmadian, Sara and Epasto, Alessandro and Kumar, Ravi and Mahdian, Mohammad},
+booktitle = {KDD},
+file = {:Users/sw160/Library/Application Support/Mendeley Desktop/Downloaded/Ahmadian et al. - 2019 - Clustering without Over-Representation.pdf:pdf},
+pages = {267--275},
+title = {{Clustering without Over-Representation}},
+year = {2019}
+}
+
+@incollection{markatou2017statistical,
+  title={Statistical distances and their role in robustness},
+  author={Markatou, Marianthi and Chen, Yang and Afendras, Georgios and Lindsay, Bruce G},
+  booktitle={New Advances in Statistics and Data Science},
+  pages={3--26},
+  year={2017},
+  publisher={Springer}
+}
