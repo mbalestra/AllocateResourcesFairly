@@ -1,4 +1,4 @@
-# Fair Resource Allocation
+# Fair Resource Distribution
 
 Martina Balestra, Ellie Haber, Sheng Wang
 
